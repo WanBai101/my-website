@@ -14,21 +14,133 @@
             100% { opacity: 1; transform: translateY(0) scale(1); }
         }
         .drop-in { animation: dropIn 0.8s cubic-bezier(0.2, 0.9, 0.3, 1.2) forwards; }
+        .avatar-stage{position:relative;width:96px;height:96px;margin:0 auto 24px}
+        .heart-layer{position:absolute;inset:-90px;pointer-events:none;z-index:1;overflow:visible}
+        .heart{position:absolute;font-size:15px;pointer-events:none;will-change:transform,opacity;animation:heartArc 1.3s cubic-bezier(.25,.6,.4,1) forwards;transform:translate(-50%,-50%)}
+        @keyframes heartArc{
+            0%{opacity:0;transform:translate(-50%,-50%) scale(.5)}
+            18%{opacity:1;transform:translate(calc(-50% + var(--dx) * .18), calc(-50% + var(--dy) * .18)) scale(1)}
+            100%{opacity:0;transform:translate(calc(-50% + var(--dx)), calc(-50% + var(--dy))) scale(.85)}
+        }
+        .avatar-img{width:96px;height:96px;border-radius:50%;display:block;box-shadow:0 6px 18px rgba(79,70,229,.25);border:2px solid #fff;object-fit:cover;cursor:pointer;user-select:none;-webkit-tap-highlight-color:transparent;transition:transform .18s cubic-bezier(.2,.9,.3,1.6);position:relative;z-index:2}
+        .avatar-img.pop{animation:avatarPop .45s cubic-bezier(.2,.9,.3,1.8)}
+        @keyframes avatarPop{0%{transform:scale(1)}35%{transform:scale(1.07)}70%{transform:scale(.98)}100%{transform:scale(1)}}
+        .mask{position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:99;display:flex;align-items:center;justify-content:center;padding:20px;opacity:0;pointer-events:none;transition:opacity .25s ease}
+        .mask.show{opacity:1;pointer-events:auto}
+        .dialog{background:#fff;border-radius:18px;padding:22px;max-width:380px;width:100%;text-align:center;transform:translateY(12px) scale(.96);transition:transform .28s cubic-bezier(.2,.9,.3,1.15)}
+        .mask.show .dialog{transform:none}
+        .dialog h3{margin:0 0 10px;font-size:20px;color:#1b2a4a}
+        .dialog .body{font-size:14px;color:#475569;line-height:1.7;margin-bottom:18px;white-space:pre-wrap}
+        .dialog .dbtns{display:flex;gap:10px}
+        .dialog .dbtns button{flex:1;padding:11px;border:none;border-radius:10px;font-size:14px;cursor:pointer;transition:transform .12s,background .2s}
+        .dialog .dbtns button:active{transform:scale(.96)}
+        .dialog .ok{background:#4f46e5;color:#fff}
+        .dialog .ok:active{background:#4338ca}
+        .dialog .cancel{background:#eef2f7;color:#475569}
+        .dialog .cancel:active{background:#dde3ec}
     </style>
 </head>
 <body class="bg-gradient-to-br from-indigo-50 via-white to-purple-50 min-h-screen flex items-center justify-center p-4">
     <div id="mainCard" class="max-w-2xl w-full bg-white/70 backdrop-blur-sm rounded-3xl shadow-2xl p-8 text-center border border-white/50 drop-in">
-        <div class="w-24 h-24 bg-gradient-to-br from-indigo-500 to-purple-600 rounded-full mx-auto flex items-center justify-center text-white text-4xl font-bold shadow-lg mb-6">晚白</div>
-        <h1 class="text-4xl font-bold text-gray-800 mb-2">NEW DOMAIN<br>wanbai.xyz</h1>
-        <p class="text-gray-500 text-sm mb-6">✨ 晚白科技官方网站 已上线</p>
+        <div class="avatar-stage">
+            <div class="heart-layer" id="heartLayer"></div>
+            <img class="avatar-img" id="avatar" src="https://s41.ax1x.com/2026/09/05/pnAZAN4.png" alt="晚白" onclick="onAvatarClick()">
+        </div>
+        <h1 class="text-center mb-3 leading-tight"><span class="block text-2xl font-semibold text-gray-600 mb-1">-NEW DOMAIN-</span><span class="block text-5xl font-bold text-gray-800">Welcome</span></h1>
+        <p class="text-gray-500 text-sm mb-6 leading-relaxed">科技不应该是高高在上<br>而是服务于每一个人</p>
         <div class="border-t border-gray-200/60 my-6"></div>
         <p class="text-gray-600 text-lg leading-relaxed mb-4">这里是 <span class="font-semibold text-indigo-600">晚白科技</span> 的首页。</p>
-        <p class="text-gray-400 text-sm mb-8">从注册域名到部署上线，全套流程亲手打通。🚀</p>
+        <p class="text-gray-400 text-sm mb-8">从注册域名到部署上线，全套流程亲手打通。</p>
         <div class="flex flex-wrap gap-4 justify-center">
             <a href="/shop/" class="px-6 py-3 bg-indigo-600 text-white rounded-2xl font-medium hover:bg-indigo-700 transition shadow-md hover:shadow-lg">进入商城</a>
-            <a href="/about/" class="px-6 py-3 bg-gray-100 text-gray-700 rounded-2xl font-medium hover:bg-gray-200 transition">关于我</a>
+            <a href="javascript:;" onclick="showAbout()" class="px-6 py-3 bg-gray-100 text-gray-700 rounded-2xl font-medium hover:bg-gray-200 transition">关于我</a>
         </div>
-        <div class="mt-8 text-xs text-gray-400">© 2026 wanbai.xyz · 用 ❤️ 和 ☕ 搭建</div>
+        <div class="mt-8 text-xs text-gray-400">© 2026 wanbai.xyz · 格物致知 守正创新</div>
     </div>
+
+    <div class="mask" id="mask">
+        <div class="dialog" id="dialog"></div>
+    </div>
+
+    <script>
+    var _clickCount = 0;
+
+    function onAvatarClick(){
+        loveBurst();
+        _clickCount++;
+        if(_clickCount >= 10){
+            _clickCount = 0;
+            showWX();
+        }
+    }
+
+    function loveBurst(){
+        var av = document.getElementById('avatar');
+        av.classList.remove('pop');
+        void av.offsetWidth;
+        av.classList.add('pop');
+        var layer = document.getElementById('heartLayer');
+        var W = layer.offsetWidth;
+        var H = layer.offsetHeight;
+        var startX = W / 2;
+        var startY = H / 2 + 10;
+        var n = 3 + Math.floor(Math.random() * 2);
+        for(var i = 0; i < n; i++){
+            (function(idx){
+                var heart = document.createElement('div');
+                heart.className = 'heart';
+                heart.textContent = '❤️';
+                var ang = (-70 + Math.random() * 140) * Math.PI / 180;
+                var dist = 90 + Math.random() * 80;
+                var dx = Math.sin(ang) * dist;
+                var dy = -Math.abs(Math.cos(ang) * dist) * 0.95;
+                heart.style.left = startX + 'px';
+                heart.style.top = startY + 'px';
+                heart.style.fontSize = (13 + Math.random() * 5) + 'px';
+                heart.style.setProperty('--dx', dx.toFixed(1) + 'px');
+                heart.style.setProperty('--dy', dy.toFixed(1) + 'px');
+                heart.style.animationDelay = (idx * 0.08) + 's';
+                layer.appendChild(heart);
+                setTimeout(function(el){ return function(){ if(el && el.parentNode) el.parentNode.removeChild(el); }; }(heart), 1700);
+            })(i);
+        }
+    }
+
+    function openDialog(html){
+        document.getElementById('dialog').innerHTML = html;
+        document.getElementById('mask').classList.add('show');
+        document.body.style.overflow = 'hidden';
+    }
+    function closeMask(){
+        document.getElementById('mask').classList.remove('show');
+        document.body.style.overflow = '';
+    }
+
+    function showWX(){
+        openDialog('<h3>嘿嘿~</h3><div class="body">好巴适呀~给你人家的微信:\nwanbaikeji</div><div class="dbtns"><button class="ok" onclick="closeMask()">知道啦</button></div>');
+    }
+
+    function showAbout(){
+        openDialog('<h3>嘿嘿~</h3><div class="body">原来你这么想了解我呀~</div>' +
+            '<div class="dbtns">' +
+              '<button class="cancel" onclick="closeMask()">取消</button>' +
+              '<button class="ok" onclick="goQQ()">访问QQ</button>' +
+            '</div>');
+    }
+
+    function goQQ(){
+        closeMask();
+        var webUrl = 'https://qm.qq.com/q/2FPKjbpAdq';
+        var appUrl = 'mqqapi://card/show_pslcard?src_type=internal&version=1&uin=851089686&card_type=person&source=qrcode';
+        var jumped = false;
+        function onHide(){ if(document.hidden){ jumped = true; } }
+        document.addEventListener('visibilitychange', onHide);
+        setTimeout(function(){
+            document.removeEventListener('visibilitychange', onHide);
+            if(!jumped) window.location.href = webUrl;
+        }, 900);
+        window.location.href = appUrl;
+    }
+    </script>
 </body>
 </html>
