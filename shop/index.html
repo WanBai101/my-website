@@ -14,11 +14,7 @@
   .avatar-stage{position:relative;width:96px;height:96px;margin:0 auto 12px}
   .heart-layer{position:absolute;inset:-90px;pointer-events:none;z-index:1;overflow:visible}
   .heart{position:absolute;font-size:15px;pointer-events:none;will-change:transform,opacity;animation:heartArc 1.3s cubic-bezier(.25,.6,.4,1) forwards;transform:translate(-50%,-50%)}
-  @keyframes heartArc{
-    0%{opacity:0;transform:translate(-50%,-50%) scale(.5)}
-    18%{opacity:1;transform:translate(calc(-50% + var(--dx) * .18), calc(-50% + var(--dy) * .18)) scale(1)}
-    100%{opacity:0;transform:translate(calc(-50% + var(--dx)), calc(-50% + var(--dy))) scale(.85)}
-  }
+  @keyframes heartArc{0%{opacity:0;transform:translate(-50%,-50%) scale(.5)}18%{opacity:1;transform:translate(calc(-50% + var(--dx)*.18), calc(-50% + var(--dy)*.18)) scale(1)}100%{opacity:0;transform:translate(calc(-50% + var(--dx)), calc(-50% + var(--dy))) scale(.85)}}
   .avatar{width:96px;height:96px;border-radius:50%;display:block;box-shadow:0 6px 18px rgba(79,70,229,.25);border:3px solid #fff;object-fit:cover;cursor:pointer;user-select:none;-webkit-tap-highlight-color:transparent;transition:transform .18s cubic-bezier(.2,.9,.3,1.6);position:relative;z-index:2}
   .avatar.pop{animation:avatarPop .45s cubic-bezier(.2,.9,.3,1.8)}
   @keyframes avatarPop{0%{transform:scale(1)}35%{transform:scale(1.07)}70%{transform:scale(.98)}100%{transform:scale(1)}}
@@ -30,8 +26,7 @@
   .item .name{font-size:15px;color:#1b2a4a;font-weight:600;margin-bottom:4px}
   .item .price{font-size:18px;color:#e0392b;font-weight:700}
   .actwrap{display:flex;align-items:flex-end;gap:10px;flex-shrink:0}
-  .detail{color:#3b82f6;font-size:12px;cursor:pointer;text-decoration:underline;padding-bottom:3px;transition:color .2s}
-  .detail:active{color:#1d4ed8}
+  .detail{color:#3b82f6;font-size:12px;cursor:pointer;text-decoration:underline;padding-bottom:3px}
   .buy{background:#4f46e5;color:#fff;border:none;border-radius:10px;padding:10px 18px;font-size:14px;cursor:pointer;white-space:nowrap;transition:background .2s,transform .12s}
   .buy:active{background:#4338ca;transform:scale(.95)}
   #msg{color:#1a7f37;font-size:13px;min-height:18px;text-align:center;margin-top:10px;white-space:pre-wrap}
@@ -40,19 +35,29 @@
   @keyframes resultIn{0%{opacity:0;transform:scale(.96)}100%{opacity:1;transform:none}}
   .result .k{color:#166534;font-size:13px;margin-bottom:8px;font-weight:600}
   .result .c{color:#166534;font-size:14px;line-height:1.8;white-space:pre-wrap;word-break:break-all;user-select:all}
-  .copybtn{background:#16a34a;color:#fff;border:none;border-radius:8px;padding:6px 12px;font-size:12px;margin-top:10px;cursor:pointer;transition:background .2s}
+  .infobox{margin-top:12px;padding-top:12px;border-top:1px dashed #bbf7d0;font-size:14px;color:#166534;line-height:2}
+  .infobox span{font-family:monospace;font-weight:700;user-select:all}
+  .btnrow{display:flex;gap:10px;margin-top:12px}
+  .copybtn,.grpbtn{flex:1;text-align:center;border:none;border-radius:8px;padding:10px;font-size:14px;cursor:pointer;text-decoration:none;transition:background .2s}
+  .copybtn{background:#16a34a;color:#fff}
   .copybtn:active{background:#15803d}
+  .grpbtn{background:#2563eb;color:#fff;display:block}
+  .grpbtn:active{background:#1d4ed8}
   .divider{border-top:1px dashed #dbe2ee;margin:20px 0;position:relative}
   .divider span{position:absolute;top:-9px;left:50%;transform:translateX(-50%);background:#fff;padding:0 8px;font-size:12px;color:#8a97ad}
   .querybox{display:flex;gap:8px}
   .querybox input{flex:1;padding:10px;border:1px solid #ccd;border-radius:10px;font-size:14px;min-width:0}
-  .querybox button{background:#16a34a;color:#fff;border:none;border-radius:10px;padding:0 16px;font-size:14px;cursor:pointer;flex-shrink:0;transition:background .2s,transform .12s}
-  .querybox button:active{background:#15803d;transform:scale(.95)}
+  .querybox button{background:#16a34a;color:#fff;border:none;border-radius:10px;padding:0 16px;font-size:14px;cursor:pointer;flex-shrink:0}
   .qlist{margin-top:12px}
-  .qitem{background:#f8fafc;border:1px solid #e2e8f0;border-radius:10px;padding:10px;margin-bottom:8px;font-size:13px;animation:resultIn .35s ease both}
+  .qitem{background:#f8fafc;border:1px solid #e2e8f0;border-radius:10px;padding:10px;margin-bottom:8px;font-size:13px}
   .qitem .r1{color:#1b2a4a;font-weight:600;margin-bottom:4px}
   .qitem .r2{color:#64748b;font-size:12px;word-break:break-all}
   .qitem .rc{color:#15803d;font-size:13px;line-height:1.7;white-space:pre-wrap;word-break:break-all;margin-top:6px;user-select:all}
+  .qitem .qinfo{margin-top:6px;font-size:12px;color:#334155;line-height:1.9}
+  .qitem .qinfo span{font-family:monospace;font-weight:700;user-select:all}
+  .qitem .qbtns{margin-top:8px}
+  .qitem .qcopy{background:#16a34a;color:#fff;border:none;border-radius:7px;padding:7px 14px;font-size:12px;cursor:pointer}
+  .qitem .qcopy:active{background:#15803d}
   #qmsg{color:#1a7f37;font-size:13px;min-height:18px;text-align:center;margin-top:8px}
   #qmsg.err{color:#c0392b}
   .mask{position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:99;display:flex;align-items:center;justify-content:center;padding:20px;opacity:0;pointer-events:none;transition:opacity .25s ease}
@@ -65,12 +70,9 @@
   .dialog input{width:100%;padding:10px;border:1px solid #ccd;border-radius:10px;font-size:15px;margin:10px 0 4px;text-align:left}
   .dialog .dmsg{font-size:12px;color:#c0392b;min-height:16px;text-align:left}
   .dialog .dbtns{display:flex;gap:10px}
-  .dialog .dbtns button{flex:1;padding:11px;border:none;border-radius:10px;font-size:14px;cursor:pointer;transition:transform .12s,background .2s}
-  .dialog .dbtns button:active{transform:scale(.96)}
+  .dialog .dbtns button{flex:1;padding:11px;border:none;border-radius:10px;font-size:14px;cursor:pointer}
   .dialog .ok{background:#4f46e5;color:#fff}
-  .dialog .ok:active{background:#4338ca}
   .dialog .cancel{background:#eef2f7;color:#475569}
-  .dialog .cancel:active{background:#dde3ec}
 </style>
 </head>
 <body>
@@ -84,24 +86,15 @@
 
   <div class="item">
     <div class="info"><div class="name">晚白-BA辅助</div><div class="price">¥12.00</div></div>
-    <div class="actwrap">
-      <span class="detail" onclick="showDetail('ba')">查看详情</span>
-      <button class="buy" onclick="askBuy('ba')">购买</button>
-    </div>
+    <div class="actwrap"><span class="detail" onclick="showDetail('ba')">查看详情</span><button class="buy" onclick="askBuy('ba')">购买</button></div>
   </div>
   <div class="item">
     <div class="info"><div class="name">机场不限速VPN</div><div class="price">¥25.00</div></div>
-    <div class="actwrap">
-      <span class="detail" onclick="showDetail('jc')">查看详情</span>
-      <button class="buy" onclick="askBuy('jc')">购买</button>
-    </div>
+    <div class="actwrap"><span class="detail" onclick="showDetail('jc')">查看详情</span><button class="buy" onclick="askBuy('jc')">购买</button></div>
   </div>
   <div class="item">
     <div class="info"><div class="name">帮忙部署网站</div><div class="price">¥50.00</div></div>
-    <div class="actwrap">
-      <span class="detail" onclick="showDetail('dep')">查看详情</span>
-      <button class="buy" onclick="askBuy('dep')">购买</button>
-    </div>
+    <div class="actwrap"><span class="detail" onclick="showDetail('dep')">查看详情</span><button class="buy" onclick="askBuy('dep')">购买</button></div>
   </div>
 
   <div id="msg"></div>
@@ -109,7 +102,14 @@
   <div class="result" id="result">
     <div class="k">发货内容：</div>
     <div class="c" id="cardtext"></div>
-    <button class="copybtn" onclick="copyCard()">复制</button>
+    <div class="infobox">
+      <div>订单号：<span id="orderno"></span></div>
+      <div>联系方式：<span id="phoneno"></span></div>
+    </div>
+    <div class="btnrow">
+      <button class="copybtn" id="btnCopyCard" onclick="copyCard()">复制卡密</button>
+      <a class="grpbtn" href="https://qm.qq.com/q/gkPMIIBRde" target="_blank" rel="noopener">加入群聊</a>
+    </div>
   </div>
 
   <div class="divider"><span>订单查询</span></div>
@@ -121,9 +121,7 @@
   <div class="qlist" id="qlist"></div>
 </div>
 
-<div class="mask" id="mask">
-  <div class="dialog" id="dialog"></div>
-</div>
+<div class="mask" id="mask"><div class="dialog" id="dialog"></div></div>
 
 <script>
 var PAY_BASE = "https://wb-ba-d2g336r8n2be77b2a-1369604588.ap-shanghai.app.tcloudbase.com/pay";
@@ -133,50 +131,22 @@ var _card = '';
 var _scrollY = 0;
 var _clickCount = 0;
 
-function onAvatarClick(){
-  loveBurst();
-  _clickCount++;
-  if(_clickCount >= 10){
-    _clickCount = 0;
-    showWX();
-  }
-}
-
+function onAvatarClick(){ loveBurst(); _clickCount++; if(_clickCount>=10){_clickCount=0; showWX();} }
 function loveBurst(){
-  var av = $('avatar');
-  av.classList.remove('pop');
-  void av.offsetWidth;
-  av.classList.add('pop');
-  var layer = $('heartLayer');
-  var W = layer.offsetWidth;
-  var H = layer.offsetHeight;
-  var startX = W / 2;
-  var startY = H / 2 + 10;
-  var n = 3 + Math.floor(Math.random() * 2);
-  for(var i = 0; i < n; i++){
-    (function(idx){
-      var heart = document.createElement('div');
-      heart.className = 'heart';
-      heart.textContent = '❤️';
-      var ang = (-70 + Math.random() * 140) * Math.PI / 180;
-      var dist = 90 + Math.random() * 80;
-      var dx = Math.sin(ang) * dist;
-      var dy = -Math.abs(Math.cos(ang) * dist) * 0.95;
-      heart.style.left = startX + 'px';
-      heart.style.top = startY + 'px';
-      heart.style.fontSize = (13 + Math.random() * 5) + 'px';
-      heart.style.setProperty('--dx', dx.toFixed(1) + 'px');
-      heart.style.setProperty('--dy', dy.toFixed(1) + 'px');
-      heart.style.animationDelay = (idx * 0.08) + 's';
-      layer.appendChild(heart);
-      setTimeout(function(el){ return function(){ if(el && el.parentNode) el.parentNode.removeChild(el); }; }(heart), 1700);
-    })(i);
-  }
+  var av=$('avatar'); av.classList.remove('pop'); void av.offsetWidth; av.classList.add('pop');
+  var layer=$('heartLayer'), W=layer.offsetWidth, H=layer.offsetHeight, startX=W/2, startY=H/2+10;
+  var n=3+Math.floor(Math.random()*2);
+  for(var i=0;i<n;i++){(function(idx){
+    var heart=document.createElement('div'); heart.className='heart'; heart.textContent='❤️';
+    var ang=(-70+Math.random()*140)*Math.PI/180, dist=90+Math.random()*80;
+    var dx=Math.sin(ang)*dist, dy=-Math.abs(Math.cos(ang)*dist)*0.95;
+    heart.style.left=startX+'px'; heart.style.top=startY+'px'; heart.style.fontSize=(13+Math.random()*5)+'px';
+    heart.style.setProperty('--dx',dx.toFixed(1)+'px'); heart.style.setProperty('--dy',dy.toFixed(1)+'px');
+    heart.style.animationDelay=(idx*0.08)+'s'; layer.appendChild(heart);
+    setTimeout(function(el){return function(){if(el&&el.parentNode)el.parentNode.removeChild(el);};}(heart),1700);
+  })(i);}
 }
-
-function showWX(){
-  openMask('<h3>嘿嘿~</h3><div class="body">好巴适呀~给你人家的微信:\nwanbaikeji<div class="small">(但是加了微信后并不会给你降价哦)</div></div><div class="dbtns"><button class="ok" onclick="closeMask()">知道啦</button></div>');
-}
+function showWX(){ openMask('<h3>嘿嘿~</h3><div class="body">好巴适呀~给你人家的微信:\nwanbaikeji<div class="small">(但是加了微信后并不会给你降价哦)</div></div><div class="dbtns"><button class="ok" onclick="closeMask()">知道啦</button></div>'); }
 
 var DETAILS = {
   ba: "蔚蓝档案科技辅助\n>独家伪装防封思路&一键跳关<\n\n版本:V12.9  更新时间:2026/8/28\n支持rootLSP，支持免root框架  支持模拟器\n！不支持IOS系统\n功能:修改伤害，修改血量，无限技能，加速，必定闪避等\n(模拟器环境人工配置费收3元)\n支持版本:国服官服/b服\n12元永久使用，享内部群免费更新，全网超低价！\n有问题可直接咨询客服QQ(群主)",
@@ -184,103 +154,106 @@ var DETAILS = {
   dep: "50元一条龙帮忙从零部署上架网站，从域名到DNS再到网页Github代码部署，全部一条龙。\n\n-说出你的需求，晚白为你实现-"
 };
 
-function msg(t, err){ $('msg').textContent = t; $('msg').className = err ? 'err' : ''; }
-function qmsg(t, err){ $('qmsg').textContent = t; $('qmsg').className = err ? 'err' : ''; }
-
-function openMask(html){
-  $('dialog').innerHTML = html;
-  _scrollY = window.scrollY || 0;
-  document.body.style.top = (-_scrollY) + 'px';
-  document.body.classList.add('locked');
-  $('mask').classList.add('show');
-  setTimeout(function(){ var el=$('phoneInput'); if(el) el.focus(); }, 280);
-}
-function closeMask(){
-  $('mask').classList.remove('show');
-  document.body.classList.remove('locked');
-  document.body.style.top = '';
-  window.scrollTo(0, _scrollY);
-}
-
-function showDetail(sku){
-  openMask('<h3>商品详情</h3><div class="body">' + DETAILS[sku].replace(/\n/g,'<br>') + '</div><div class="dbtns"><button class="ok" onclick="closeMask()">知道了</button></div>');
-}
-
-function askBuy(sku){
-  openMask('<h3>请输入手机号</h3><div class="body">付款后凭手机号或订单号可随时查询卡密。</div>' +
-    '<input id="phoneInput" type="tel" maxlength="11" placeholder="请输入11位手机号">' +
-    '<div class="dmsg" id="dmsg"></div>' +
-    '<div class="dbtns"><button class="cancel" onclick="closeMask()">取消</button><button class="ok" onclick="doBuy(\''+sku+'\')">去支付</button></div>');
-}
-
+function msg(t,err){$('msg').textContent=t;$('msg').className=err?'err':'';}
+function qmsg(t,err){$('qmsg').textContent=t;$('qmsg').className=err?'err':'';}
+function openMask(html){$('dialog').innerHTML=html;_scrollY=window.scrollY||0;document.body.style.top=(-_scrollY)+'px';document.body.classList.add('locked');$('mask').classList.add('show');setTimeout(function(){var el=$('phoneInput');if(el)el.focus();},280);}
+function closeMask(){$('mask').classList.remove('show');document.body.classList.remove('locked');document.body.style.top='';window.scrollTo(0,_scrollY);}
+function showDetail(sku){openMask('<h3>商品详情</h3><div class="body">'+DETAILS[sku].replace(/\n/g,'<br>')+'</div><div class="dbtns"><button class="ok" onclick="closeMask()">知道了</button></div>');}
+function askBuy(sku){openMask('<h3>请输入手机号</h3><div class="body">付款后凭手机号或订单号可随时查询卡密。</div><input id="phoneInput" type="tel" maxlength="11" placeholder="请输入11位手机号"><div class="dmsg" id="dmsg"></div><div class="dbtns"><button class="cancel" onclick="closeMask()">取消</button><button class="ok" onclick="doBuy(\''+sku+'\')">去支付</button></div>');}
 async function doBuy(sku){
-  var phone = ($('phoneInput').value || '').trim();
-  if(!PHONE_RE.test(phone)){ $('dmsg').textContent = '请输入有效的11位手机号'; return; }
-  $('dmsg').style.color = '#1a7f37';
-  $('dmsg').textContent = '正在创建订单...';
+  var phone=($('phoneInput').value||'').trim();
+  if(!PHONE_RE.test(phone)){$('dmsg').textContent='请输入有效的11位手机号';return;}
+  $('dmsg').style.color='#1a7f37'; $('dmsg').textContent='正在创建订单...';
   try{
-    var r = await fetch(PAY_BASE + '?action=create&sku=' + sku + '&phone=' + encodeURIComponent(phone), {cache:'no-store'});
-    var j = await r.json();
-    if(j.code !== 0){ $('dmsg').style.color = '#c0392b'; $('dmsg').textContent = j.msg || '下单失败'; return; }
-    localStorage.setItem('wb_pending', j.out_trade_no);
-    window.location.href = j.payurl;
-  }catch(e){ $('dmsg').style.color = '#c0392b'; $('dmsg').textContent = '请求失败: ' + e.message; }
+    var r=await fetch(PAY_BASE+'?action=create&sku='+sku+'&phone='+encodeURIComponent(phone),{cache:'no-store'});
+    var j=await r.json();
+    if(j.code!==0){$('dmsg').style.color='#c0392b';$('dmsg').textContent=j.msg||'下单失败';return;}
+    localStorage.setItem('wb_pending',j.out_trade_no); window.location.href=j.payurl;
+  }catch(e){$('dmsg').style.color='#c0392b';$('dmsg').textContent='请求失败: '+e.message;}
 }
-
 async function pollPending(){
-  var p = new URLSearchParams(location.search).get('paid');
-  if(!p) return;
-  msg('正在确认支付结果...');
-  var tries = 0;
-  var timer = setInterval(async function(){
+  var p=new URLSearchParams(location.search).get('paid'); if(!p) return;
+  msg('正在确认支付结果...'); var tries=0;
+  var timer=setInterval(async function(){
     tries++;
     try{
-      var r = await fetch(PAY_BASE + '?action=check&out_trade_no=' + encodeURIComponent(p), {cache:'no-store'});
-      var j = await r.json();
-      if(j.paid && j.card){ clearInterval(timer); msg('支付成功！'); showCard(j.card); }
-      else if(j.paid && !j.card){ clearInterval(timer); msg('支付成功，但暂时缺货，请联系客服补发。', 1); }
-      else if(tries > 40){ clearInterval(timer); msg('未确认到支付，如已付款请用下方「订单查询」重试。', 1); }
+      var r=await fetch(PAY_BASE+'?action=check&out_trade_no='+encodeURIComponent(p),{cache:'no-store'});
+      var j=await r.json();
+      if(j.paid && j.card){ clearInterval(timer); msg('支付成功！'); showResult(j); }
+      else if(j.paid && !j.card){ clearInterval(timer); msg('支付成功，但暂时缺货，请联系客服补发。',1); }
+      else if(tries>40){ clearInterval(timer); msg('未确认到支付，如已付款请用下方「订单查询」重试。',1); }
     }catch(e){}
-  }, 3000);
+  },3000);
 }
 
-function showCard(card){ _card = card; $('result').style.display = 'block'; $('cardtext').textContent = card; }
-function copyCard(){ if(!_card) return; if(navigator.clipboard){ navigator.clipboard.writeText(_card).then(function(){ alert('已复制'); }); } else { alert('长按复制'); } }
+// 从多行发货文案中提取卡密那一行的值：优先取“卡密：”后的内容，兼容自定义卡密；
+// dep 等无“卡密：”行的，退回整段文案。
+function extractCard(text){
+  if(!text) return '';
+  var m = text.match(/卡密[：:]\s*([^\n\r]+)/);
+  if(m && m[1]) return m[1].trim();
+  return text.trim();
+}
+
+function showResult(j){
+  _card = j.card || '';
+  $('result').style.display='block';
+  $('cardtext').textContent = j.card || '';
+  $('orderno').textContent = j.orderno || j.out_trade_no || '';
+  $('phoneno').textContent = j.phone || '';
+  if(j.needCard===false){ $('btnCopyCard').style.display='none'; }
+  else { $('btnCopyCard').style.display='block'; }
+}
+function copyCard(){
+  if(!_card) return;
+  var text = extractCard(_card);
+  if(navigator.clipboard){ navigator.clipboard.writeText(text).then(function(){alert('已复制卡密');},function(){alert('长按复制：'+text);}); }
+  else { alert('长按复制：'+text); }
+}
+
+function qCopy(btn){
+  var t = btn.getAttribute('data-card') || '';
+  var text = extractCard(t);
+  if(navigator.clipboard){ navigator.clipboard.writeText(text).then(function(){alert('已复制卡密');},function(){alert('长按复制：'+text);}); }
+  else { alert('长按复制：'+text); }
+}
 
 async function queryOrder(){
-  var v = ($('qno').value || '').trim();
-  if(!v){ qmsg('请输入订单号或手机号', 1); return; }
-  $('qlist').innerHTML = '';
+  var v=($('qno').value||'').trim(); if(!v){qmsg('请输入订单号或手机号',1);return;}
+  $('qlist').innerHTML='';
   if(PHONE_RE.test(v)){
     qmsg('查询中...');
     try{
-      var r = await fetch(PAY_BASE + '?action=queryphone&phone=' + encodeURIComponent(v), {cache:'no-store'});
-      var j = await r.json();
-      if(j.code !== 0){ qmsg(j.msg || '查询失败', 1); return; }
-      if(!j.list || !j.list.length){ qmsg('该手机号没有订单记录', 1); return; }
-      qmsg('共 ' + j.list.length + ' 条订单：');
-      var html = '';
+      var r=await fetch(PAY_BASE+'?action=queryphone&phone='+encodeURIComponent(v),{cache:'no-store'});
+      var j=await r.json();
+      if(j.code!==0){qmsg(j.msg||'查询失败',1);return;}
+      if(!j.list||!j.list.length){qmsg('该手机号没有订单记录',1);return;}
+      qmsg('共 '+j.list.length+' 条订单：');
+      var html='';
       j.list.forEach(function(o){
-        var st = o.status === 'paid' ? '已支付' : (o.status === 'paid_no_stock' ? '已支付(缺货待补)' : '未支付');
-        html += '<div class="qitem"><div class="r1">' + o.name + '　¥' + o.money + '　【' + st + '】</div>' +
-          '<div class="r2">订单号：' + o.out_trade_no + '</div>' +
-          (o.card ? '<div class="rc">' + o.card + '</div>' : '') + '</div>';
+        var st=o.status==='paid'?'已支付':(o.status==='paid_no_stock'?'已支付(缺货待补)':'未支付');
+        var qo = o.orderno || o.out_trade_no || '';
+        var qp = o.phone || '';
+        html+='<div class="qitem"><div class="r1">'+o.name+'　¥'+o.money+'　【'+st+'】</div>'+
+          '<div class="qinfo">订单号：<span>'+qo+'</span><br>联系方式：<span>'+qp+'</span></div>'+
+          (o.card?'<div class="rc">'+o.card+'</div>':'')+
+          (o.card && o.needCard!==false ? '<div class="qbtns"><button class="qcopy" data-card="'+encodeURIComponent(o.card)+'" onclick="qCopy(this)">复制卡密</button></div>' : '')+
+          '</div>';
       });
-      $('qlist').innerHTML = html;
-    }catch(e){ qmsg('请求失败: ' + e.message, 1); }
+      $('qlist').innerHTML=html;
+    }catch(e){qmsg('请求失败: '+e.message,1);}
   } else {
     qmsg('查询中...');
     try{
-      var r2 = await fetch(PAY_BASE + '?action=check&out_trade_no=' + encodeURIComponent(v), {cache:'no-store'});
-      var j2 = await r2.json();
-      if(j2.code !== 0){ qmsg(j2.msg || '查询失败', 1); return; }
-      if(j2.paid && j2.card){ qmsg('已支付：'); showCard(j2.card); }
-      else if(j2.paid && !j2.card){ qmsg('已支付，但暂时缺货，请联系客服补发。', 1); }
-      else { qmsg('该订单尚未支付。', 1); }
-    }catch(e){ qmsg('请求失败: ' + e.message, 1); }
+      var r2=await fetch(PAY_BASE+'?action=check&out_trade_no='+encodeURIComponent(v),{cache:'no-store'});
+      var j2=await r2.json();
+      if(j2.code!==0){qmsg(j2.msg||'查询失败',1);return;}
+      if(j2.paid&&j2.card){ qmsg('已支付：'); showResult(j2); }
+      else if(j2.paid&&!j2.card){ qmsg('已支付，但暂时缺货，请联系客服补发。',1); }
+      else { qmsg('该订单尚未支付。',1); }
+    }catch(e){qmsg('请求失败: '+e.message,1);}
   }
 }
-
 pollPending();
 </script>
 </body>
