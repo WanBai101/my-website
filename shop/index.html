@@ -213,6 +213,7 @@ function copyCard(){
 
 function qCopy(btn){
   var t = btn.getAttribute('data-card') || '';
+  try { t = decodeURIComponent(t); } catch(e) {}
   var text = extractCard(t);
   if(navigator.clipboard){ navigator.clipboard.writeText(text).then(function(){alert('已复制卡密');},function(){alert('长按复制：'+text);}); }
   else { alert('长按复制：'+text); }
