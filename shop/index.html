@@ -262,6 +262,7 @@ async function doUnbind(){
     var r = await fetch(PAY_BASE+'?action=unbind&out_trade_no='+encodeURIComponent(_orderNo)+
       '&phone='+encodeURIComponent(_orderPhone)+'&card='+encodeURIComponent(card), {cache:'no-store'});
     var j = await r.json();
+    if(j.code===2){ umsg(j.msg,0); return; }
     if(j.code!==0){ umsg(j.msg||'解绑失败',1); return; }
     umsg(j.msg||'解绑成功');
     $('unbindCardInput').value='';
@@ -279,6 +280,7 @@ async function qUnbind(i){
     var r = await fetch(PAY_BASE+'?action=unbind&out_trade_no='+encodeURIComponent(info.no||'')+
       '&phone='+encodeURIComponent(info.phone||'')+'&card='+encodeURIComponent(card), {cache:'no-store'});
     var j = await r.json();
+    if(j.code===2){ qmsg(j.msg,0); return; }
     if(j.code!==0){ qmsg(j.msg||'解绑失败',1); return; }
     qmsg(j.msg||'解绑成功');
     setTimeout(queryOrder, 800);
@@ -301,6 +303,12 @@ function qCopy(btn){
 
 async function queryOrder(){
   var v=($('qno').value||'').trim(); if(!v){qmsg('请输入订单号或手机号',1);return;}
+  // 查询前先清掉「付款回跳时自动弹出的发货框」，避免两个框同时显示
+  $('result').style.display='none';
+  $('cardtext').textContent='';
+  $('unbindBox').style.display='none';
+  $('unbindMsg').textContent='';
+  var _ui=$('unbindCardInput'); if(_ui) _ui.value='';
   $('qlist').innerHTML='';
   if(PHONE_RE.test(v)){
     qmsg('查询中...');
