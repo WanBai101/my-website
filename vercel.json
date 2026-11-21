@@ -1,0 +1,20 @@
+{
+  "rewrites": [
+    {
+      "source": "/wanbai-app",
+      "destination": "https://wb-ba-d2g336r8n2be77b2a-1369604588.ap-shanghai.app.tcloudbase.com/wanbai-app/"
+    },
+    {
+      "source": "/wanbai-app/logo.png",
+      "destination": "https://wb-ba-d2g336r8n2be77b2a-1369604588.ap-shanghai.app.tcloudbase.com/wanbai-app/logo.png"
+    },
+    {
+      "source": "/wanbai-app/api/health",
+      "destination": "https://wb-ba-d2g336r8n2be77b2a-1369604588.ap-shanghai.app.tcloudbase.com/wanbai-app/api/health"
+    },
+    {
+      "source": "/wanbai-app/api/qq/callback",
+      "destination": "https://wb-ba-d2g336r8n2be77b2a-1369604588.ap-shanghai.app.tcloudbase.com/wanbai-app/api/qq/callback"
+    }
+  ]
+}
