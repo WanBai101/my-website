@@ -14,7 +14,7 @@
     },
     {
       "source": "/wanbai-app/api/qq/callback",
-      "destination": "https://wb-ba-d2g336r8n2be77b2a-1369604588.ap-shanghai.app.tcloudbase.com/wanbai-app/api/qq/callback"
+      "destination": "/api/wanbai-qq-callback"
     }
   ]
 }
